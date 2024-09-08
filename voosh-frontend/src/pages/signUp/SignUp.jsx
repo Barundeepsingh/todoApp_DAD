@@ -47,7 +47,7 @@ const SignUp = () => {
         password,
       };
 
-      await axios.post("http://localhost:5000/register", userData);
+      await axios.post("https://todoapp-dad.onrender.com/register", userData);
       navigate('/');
     } catch (error) {
       console.error('Error signing up:', error);
@@ -70,7 +70,7 @@ const SignUp = () => {
         photo: user.photoURL,
       };
       console.log('userData from SignUP:', userData);
-      await axios.post("http://localhost:5000/register", userData);
+      await axios.post("https://todoapp-dad.onrender.com/register", userData);
       navigate('/login');
     } catch (error) {
       setErrorMessage(error.response.data.message)
