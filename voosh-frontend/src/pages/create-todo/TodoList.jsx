@@ -16,7 +16,7 @@ const TodoList = () => {
     const fetchTasks = async () => {
       console.log("Fetching task with UID", uid);
       try {
-      const response = await axios.get("http://localhost:5000/tasks",{
+      const response = await axios.get("https://todoapp-re6f.onrender.com/tasks",{
         params:{uid: uid}
       });
       setTasks(response.data);
@@ -30,7 +30,7 @@ const TodoList = () => {
   const handleDelete = async (taskId) => {
     console.log("this needed to deleted",taskId)
     try {
-    await axios.delete(`http://localhost:5000/deleteTasks/${taskId}`);
+    await axios.delete(`https://todoapp-re6f.onrender.com/deleteTasks/${taskId}`);
     setTasks(tasks.filter((task) => task._id !== taskId));
     }catch(error){
       console.error('Error deleting task', error)
@@ -40,7 +40,7 @@ const TodoList = () => {
   const handleUpdate = async (taskId, updatedTitle, updatedBody) => {
     console.log("Updating task with ID:", taskId);
     try {
-        await axios.put(`http://localhost:5000/updateTasks/${taskId}`, {
+        await axios.put(`https://todoapp-re6f.onrender.com/updateTasks/${taskId}`, {
             title: updatedTitle,
             body: updatedBody,
         });
@@ -70,7 +70,7 @@ const TodoList = () => {
     setTasks(updatedTasks);
 
     // Update task status in the database
-    await axios.put(`http://localhost:5000/updateTasks/${taskToMove._id}`, {
+    await axios.put(`https://todoapp-re6f.onrender.com/updateTasks/${taskToMove._id}`, {
       ...taskToMove,
       status: status,
     });
@@ -81,7 +81,7 @@ const TodoList = () => {
       console.log("task which is being added", task);
       const taskWithUid = {...task, uid:uid};
       console.log("task with uid", taskWithUid);
-      const response = await axios.post("http://localhost:5000/addTasks", taskWithUid);
+      const response = await axios.post("https://todoapp-re6f.onrender.com/addTasks", taskWithUid);
       setTasks((prevTasks) => [...prevTasks, response.data]);
     } catch (error) {
       console.error("Error adding task:", error);
