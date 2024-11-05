@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const databaseUrl = process.env.MONGO_CLIENT
 const secretKey = process.env.JWT_SECRET_KEY
 
