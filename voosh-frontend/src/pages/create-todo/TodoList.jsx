@@ -16,7 +16,7 @@ const TodoList = () => {
     const fetchTasks = async () => {
       console.log("Fetching task with UID", uid);
       try {
-      const response = await axios.get("https://todoapp-dad.onrender.com/tasks",{
+      const response = await axios.get("http://localhost:5000/tasks",{
         params:{uid: uid}
       });
       setTasks(response.data);
@@ -30,7 +30,7 @@ const TodoList = () => {
   const handleDelete = async (taskId) => {
     console.log("this needed to deleted",taskId)
     try {
-    await axios.delete(`https://todoapp-dad.onrender.com/deleteTasks/${taskId}`);
+    await axios.delete(`http://localhost:5000/deleteTasks/${taskId}`);
     setTasks(tasks.filter((task) => task._id !== taskId));
     }catch(error){
       console.error('Error deleting task', error)
@@ -40,7 +40,7 @@ const TodoList = () => {
   const handleUpdate = async (taskId, updatedTitle, updatedBody) => {
     console.log("Updating task with ID:", taskId);
     try {
-        await axios.put(`https://todoapp-dad.onrender.com/updateTasks/${taskId}`, {
+        await axios.put(`http://localhost:5000/updateTasks/${taskId}`, {
             title: updatedTitle,
             body: updatedBody,
         });
@@ -70,7 +70,7 @@ const TodoList = () => {
     setTasks(updatedTasks);
 
     // Update task status in the database
-    await axios.put(`https://todoapp-dad.onrender.com/updateTasks/${taskToMove._id}`, {
+    await axios.put(`http://localhost:5000/updateTasks/${taskToMove._id}`, {
       ...taskToMove,
       status: status,
     });
@@ -81,7 +81,7 @@ const TodoList = () => {
       console.log("task which is being added", task);
       const taskWithUid = {...task, uid:uid};
       console.log("task with uid", taskWithUid);
-      const response = await axios.post("https://todoapp-dad.onrender.com/addTasks", taskWithUid);
+      const response = await axios.post("http://localhost:5000/addTasks", taskWithUid);
       setTasks((prevTasks) => [...prevTasks, response.data]);
     } catch (error) {
       console.error("Error adding task:", error);
@@ -93,7 +93,7 @@ const TodoList = () => {
       <TaskForm addTask={addTask} />
       <main className="app_main">
         <TaskColumn
-          title="To do"
+          title="TODO"
           icon={todoIcon}
           tasks={tasks.filter((task) => task.status === "todo")}
           status="todo"
@@ -103,7 +103,7 @@ const TodoList = () => {
           onDrop={onDrop}
         />
         <TaskColumn
-          title="Doing"
+          title="IN PROGRESS"
           icon={doingIcon}
           tasks={tasks.filter((task) => task.status === "doing")}
           status="doing"
@@ -113,7 +113,7 @@ const TodoList = () => {
           onDrop={onDrop}
         />
         <TaskColumn
-          title="Done"
+          title="DONE"
           icon={doneIcon}
           tasks={tasks.filter((task) => task.status === "done")}
           status="done"

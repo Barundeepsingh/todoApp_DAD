@@ -17,7 +17,7 @@ export const Navbar = () => {
 
     const getLoggedInUserDetails = async() => {
         try {
-        const response = await axios.post("https://todoapp-dad.onrender.com/getUser", {uid})
+        const response = await axios.post("http://localhost:5000/getUser", {uid})
         console.log('User Details:', response.data.userData);
         setUserDetails(response.data.userData);
         }catch(error){
@@ -35,6 +35,7 @@ export const Navbar = () => {
             navigate('/login');
         } else if (token) {
             getLoggedInUserDetails();
+            navigate('/todoList')
         }
     }, [token, navigate, uid]);
 

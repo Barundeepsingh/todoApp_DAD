@@ -26,7 +26,7 @@ export const Login = () => {
     const handleLogIn = async () => {
         const body = {email, password};
         try {
-            const response = await axios.post("https://todoapp-dad.onrender.com/login",body);
+            const response = await axios.post("http://localhost:5000/login",body);
             console.log('User Logged In:', response.data);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("uid", response.data.payload.user);

@@ -26,6 +26,7 @@ const TaskColumn = ({ title,body, icon, tasks = [], status, handleDelete, handle
                                 taskId={task._id}
                                 index={index}
                                 setActiveCard={setActiveCard}
+                                createdAt = {task.createdAt}
                             />
                             <DropArea onDrop={() => onDrop(status, index + 1)} />
                         </React.Fragment>
